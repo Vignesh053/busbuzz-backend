@@ -6,6 +6,7 @@ import com.origami.busbuzz.entity.Route;
 import com.origami.busbuzz.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class BookingDto {
 

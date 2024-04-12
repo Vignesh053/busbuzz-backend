@@ -1,6 +1,8 @@
 package com.origami.busbuzz.controller;
 
 import com.origami.busbuzz.dto.BookingDto;
+import com.origami.busbuzz.dto.JwtAuthResponse;
+import com.origami.busbuzz.dto.LoginDto;
 import com.origami.busbuzz.dto.UserDto;
 import com.origami.busbuzz.entity.Booking;
 import com.origami.busbuzz.service.BookingService;
@@ -30,7 +32,11 @@ public class UserController {
     }
 
 
-    // create function for login
+    //  function for login
+    @PostMapping("/login")
+    public ResponseEntity<JwtAuthResponse> loginUser(@RequestBody LoginDto loginDto){
+        return new ResponseEntity<>(userService.loginUser(loginDto), HttpStatus.OK);
+    }
 
     //get user details by id
     @GetMapping("/getuser/{id}")
@@ -38,7 +44,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
-    // create function for editing profile
+    //  function for editing profile
     @PostMapping("/update/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userdto){
         return new ResponseEntity<>(userService.updateUser(id,userdto), HttpStatus.OK);
@@ -46,7 +52,7 @@ public class UserController {
 
 
 
-    //create function for creating a new booking
+    // function for creating a new booking
     @PostMapping("/addbooking")
     public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto){
         return new ResponseEntity<>(bookingService.createBooking(bookingDto), HttpStatus.OK);
@@ -54,7 +60,7 @@ public class UserController {
 
 
 
-    // create funtion for fetching all bookings based on user
+    //  funtion for fetching all bookings based on user
     @GetMapping("/getbooking/{id}")
     public ResponseEntity<List<BookingDto>> getAllBookingByUserId(@PathVariable Long id){
         List<BookingDto> bookings = bookingService.getBooking(id);
